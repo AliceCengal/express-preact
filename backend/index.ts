@@ -11,9 +11,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use(cookieParser());
 
-import routers from './routes'
-app.use('/', routers);
+import apiRouters from './routes'
+app.use('/api', apiRouters);
 
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 export default app
