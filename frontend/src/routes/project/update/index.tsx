@@ -5,14 +5,14 @@ interface Props {
   projectid: string
 }
 
-const ProjectView: FC<Props> = ({ projectid }) => {
+const ProjectUpdate: FC<Props> = ({ projectid }) => {
 
   return (
     <div class="container-lg">
-      View project: {projectid}
+      <h1>Update project: {projectid}</h1>
     </div>
   )
 
 }
 
-export default ProjectView
+export default ProjectUpdate

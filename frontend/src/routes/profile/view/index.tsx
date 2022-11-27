@@ -2,17 +2,17 @@ import { h } from "preact"
 import { FC } from "utils/FC"
 
 interface Props {
-  projectid: string
+  userid: string
 }
 
-const ProjectView: FC<Props> = ({ projectid }) => {
+const UserView: FC<Props> = ({ userid }) => {
 
   return (
     <div class="container-lg">
-      View project: {projectid}
+      <h1>View user: {userid}</h1>
     </div>
   )
 
 }
 
-export default ProjectView
+export default UserView

@@ -12,11 +12,10 @@
   padding-inline: 1rem;
 }
 
-.header h1 {
-  margin: 0;
+.header span {
   font-size: 1.5rem;
-  line-height: var(--header-height);
   font-weight: 400;
+  line-height: var(--header-height);
   color: var(--bs-white);
 }
 

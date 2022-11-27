@@ -10,7 +10,9 @@ const Home = () => (
       <ProjectTableHeader />
       <tr>
         <td>1</td>
-        <td>Pipe Ultrasonic cleaning</td>
+        <td>
+          <a href="/project/1234">Pipe Ultrasonic cleaning</a>
+        </td>
         <td>Mat</td>
         <td>{new Date().toDateString()}</td>
         <td>{new Date().toDateString()}</td>
