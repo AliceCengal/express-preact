@@ -34,6 +34,17 @@ export async function postRegister(formData: AuthForm) {
     })
 }
 
+export async function postLogout() {
+  return fetch("/api/auth", {
+    method: "DELETE",
+    credentials: 'include'
+  })
+    .then(async (res) => {
+      if (res.ok) return res.text();
+      throw new Error(await res.text())
+    })
+}
+
 export async function getProfile() {
   return fetch("/api/auth", {
     credentials: 'include'
