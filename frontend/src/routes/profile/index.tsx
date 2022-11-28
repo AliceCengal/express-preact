@@ -1,15 +1,17 @@
 import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
+import { useQuery } from 'react-query'
+import { getProfile } from 'controllers/auth';
+
 import style from './style.css';
 
-interface Props {
-  user: string;
-}
-
-// Note: `user` comes from the URL, courtesy of our router
-const Profile = ({ user }: Props) => {
+const Profile = () => {
   const [time, setTime] = useState<number>(Date.now());
-  const [count, setCount] = useState<number>(0);
+
+  const profile = useQuery(
+    ['/api/auth'],
+    getProfile
+  )
 
   useEffect(() => {
     let timer = setInterval(() => setTime(Date.now()), 1000);
@@ -18,16 +20,17 @@ const Profile = ({ user }: Props) => {
 
   return (
     <div class={style.profile}>
-      <h1>Profile: {user}</h1>
-      <p>This is the user profile for a user named {user}.</p>
+      <h1>Profile</h1>
+      {
+        profile.isLoading ?
+          <div>Loading...</div> :
+          profile.isError ?
+            <div>Failed to get profile info</div> :
+            <div>{JSON.stringify(profile.data)}</div>
+      }
 
       <div>Current time: {new Date(time).toLocaleString()}</div>
 
-      <p>
-        <button onClick={() => setCount((count) => count + 1)}>Click Me</button>
-        {' '}
-        Clicked {count} times.
-      </p>
     </div>
   );
 };

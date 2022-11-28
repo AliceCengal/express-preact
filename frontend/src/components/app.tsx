@@ -1,5 +1,6 @@
 import { h } from 'preact';
 import { Route, Router } from 'preact-router';
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 import Header from './header';
 
@@ -13,22 +14,26 @@ import ProfileUpdate from 'routes/profile/update';
 import UserView from 'routes/profile/view';
 import Login from 'routes/login';
 
+const client = new QueryClient()
+
 const App = () => (
-  <div id="app">
-    <Header />
-    <Router>
-      <Route path="/" component={Home} />
-      <Route path="/project/create" component={ProjectCreate} />
-      <Route path="/project/:projectid" component={ProjectView} />
-      <Route path="/project/:projectid/update" component={ProjectUpdate} />
+  <QueryClientProvider client={client}>
+    <div id="app">
+      <Header />
+      <Router>
+        <Route path="/" component={Home} />
+        <Route path="/project/create" component={ProjectCreate} />
+        <Route path="/project/:projectid" component={ProjectView} />
+        <Route path="/project/:projectid/update" component={ProjectUpdate} />
 
-      <Route path="/profile/" component={Profile} />
-      <Route path="/profile/update" component={ProfileUpdate} />
-      <Route path="/profile/:userid" component={UserView} />
+        <Route path="/profile/" component={Profile} />
+        <Route path="/profile/update" component={ProfileUpdate} />
+        <Route path="/profile/:userid" component={UserView} />
 
-      <Route path="/login" component={Login} />
-    </Router>
-  </div>
+        <Route path="/login" component={Login} />
+      </Router>
+    </div>
+  </QueryClientProvider>
 );
 
 export default App;

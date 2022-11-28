@@ -7,8 +7,8 @@ const Header = () => (
     <span>Workpack</span>
     <nav>
       <Link activeClassName={style.active} href="/">Projects</Link>
-      <Link activeClassName={style.active} href="/client">Clients</Link>
       <Link activeClassName={style.active} href="/profile">Profile</Link>
+      <Link activeClassName={style.active} href="/login">Login</Link>
     </nav>
   </header>
 );

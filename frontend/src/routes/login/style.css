@@ -1,0 +1,29 @@
+
+.login {
+  margin-top: 6rem;
+  margin-inline: auto;
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.login input {
+  margin-bottom: 1rem;
+}
+
+.action {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.action button[name='register'] {
+  background-color: green;
+  color: white;
+}
+
+.action button[name='login'] {
+  background-color: royalblue;
+  color: white;
+}

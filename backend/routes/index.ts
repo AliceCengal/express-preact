@@ -1,12 +1,17 @@
 import express from 'express'
-var router = express.Router();
+const router = express.Router();
 
-import userRoute from './users'
+import authRoute from "./auth"
+router.use('/auth', authRoute)
+
+import userRoute from './user'
 router.use('/user', userRoute)
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.send("Express + Typescript server");
+import projectRoute from "./project"
+router.use("/project", projectRoute)
+
+router.all('*', function(req, res, next) {
+  res.status(404)
 });
 
 export default router

@@ -6,6 +6,12 @@
   gap: 1rem;
 }
 
+.action {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
 .projects {
   width: 100%;
 }

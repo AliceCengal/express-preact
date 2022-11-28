@@ -1,5 +1,6 @@
 node_modules
-/app/build
+/frontend/build
 size-plugin.json
 declaration.d.ts
 /*.log
+*.db

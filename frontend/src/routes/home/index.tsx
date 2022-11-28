@@ -1,11 +1,16 @@
 import { h } from 'preact';
 import ProjectSearchBar from 'components/project/project-search-bar';
+import { ProjectTableHeader } from 'components/project/listing';
+
 import style from './style.css';
 
 const Home = () => (
   <div class={style.home + " container-lg"}>
     <h2>Projects</h2>
-    <ProjectSearchBar />
+    <div class={style.action}>
+      <button>new project</button>
+      <ProjectSearchBar />
+    </div>
     <table class={style.projects + " card-1"}>
       <ProjectTableHeader />
       <tr>
@@ -21,14 +26,6 @@ const Home = () => (
   </div>
 );
 
-const ProjectTableHeader = () => (
-  <tr>
-    <th>#</th>
-    <th>Project title</th>
-    <th>Owner</th>
-    <th>Date created</th>
-    <th>Date updated</th>
-  </tr>
-)
+
 
 export default Home;

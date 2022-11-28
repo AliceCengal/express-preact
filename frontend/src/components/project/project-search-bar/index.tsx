@@ -5,7 +5,8 @@ const ProjectSearchBar = () => {
 
   return (
     <div class={style.main + " card-1"}>
-      <input />
+      <input type="text" placeholder=" Search projects" />
+      <span class="material-icons">search</span>
     </div>
   )
 }
