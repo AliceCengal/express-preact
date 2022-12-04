@@ -13,6 +13,7 @@ import Profile from 'routes/profile';
 import ProfileUpdate from 'routes/profile/update';
 import UserView from 'routes/profile/view';
 import Login from 'routes/login';
+import Page404 from 'routes/404';
 
 const client = new QueryClient()
 
@@ -31,6 +32,7 @@ const App = () => (
         <Route path="/profile/:userid" component={UserView} />
 
         <Route path="/login" component={Login} />
+        <Route default component={Page404} />
       </Router>
     </div>
   </QueryClientProvider>

@@ -11,19 +11,3 @@
   justify-content: center;
   gap: 1rem;
 }
-
-.projects {
-  width: 100%;
-}
-
-.projects tr > * {
-  padding: 0.25rem 0.5rem;
-}
-
-.projects tr > *:not(:last-child) {
-  border-right: 1px solid slategray;
-}
-
-.projects tr:not(:last-child) {
-  border-bottom: 1px solid slategray;
-}

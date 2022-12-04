@@ -9,7 +9,7 @@ import style from "./style.css"
 const Login: FC<{}> = () => {
   // const queryClient = useQueryClient()
 
-  const [formData, update] = useForm<AuthForm>({
+  const { formData, update } = useForm<AuthForm>({
     email: "",
     password: ""
   })

@@ -1,17 +1,15 @@
-import { h } from 'preact';
+import { h, Fragment } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { useQuery } from 'react-query'
-import { getProfile } from 'controllers/auth';
+import { getProfile, useProfile } from 'controllers/auth';
+import ProfileCard from 'components/profile/card';
 
 import style from './style.css';
 
 const Profile = () => {
   const [time, setTime] = useState<number>(Date.now());
 
-  const profile = useQuery(
-    ['/api/auth'],
-    getProfile
-  )
+  const profile = useProfile()
 
   useEffect(() => {
     let timer = setInterval(() => setTime(Date.now()), 1000);
@@ -19,14 +17,21 @@ const Profile = () => {
   }, []);
 
   return (
-    <div class={style.profile}>
+    <div class={style.profile + ' container-sm'}>
       <h1>Profile</h1>
       {
         profile.isLoading ?
           <div>Loading...</div> :
-          profile.isError ?
+          profile.isError || !profile.data ?
             <div>Failed to get profile info</div> :
-            <div>{JSON.stringify(profile.data)}</div>
+            <>
+              <div class={style.action_bar}>
+                <button class={style.edit}>Edit</button>
+                <button class={style.deact}>Deactivate</button>
+                <button class={style.delete}>Delete</button>
+              </div>
+              <ProfileCard user={profile.data.user} />
+            </>
       }
 
       <div>Current time: {new Date(time).toLocaleString()}</div>

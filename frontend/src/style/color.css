@@ -1,0 +1,18 @@
+:root {
+  --c-left-dark: hsl(175, 50%, 31%);
+  --c-left-base: hsl(175, 50%, 45%);
+  --c-left-lite: hsl(175, 50%, 71%);
+  --c-left-hint: hsl(175, 50%, 94%);
+  --c-center-dark: hsl(205, 50%, 36%);
+  --c-center-base: hsl(205, 50%, 51%);
+  --c-center-lite: hsl(205, 50%, 76%);
+  --c-center-hint: hsl(205, 50%, 95%);
+  --c-right-dark: hsl(235, 50%, 48%);
+  --c-right-base: hsl(235, 50%, 64%);
+  --c-right-lite: hsl(235, 50%, 85%);
+  --c-right-hint: hsl(235, 50%, 97%);
+  --c-back-dark: hsl(25, 50%, 33%);
+  --c-back-base: hsl(25, 50%, 48%);
+  --c-back-lite: hsl(25, 50%, 74%);
+  --c-back-hint: hsl(25, 50%, 94%);
+}

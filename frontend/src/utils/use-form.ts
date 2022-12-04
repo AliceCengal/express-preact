@@ -1,7 +1,11 @@
-import { useReducer } from "preact/hooks"
+import { useCallback, useReducer } from "preact/hooks"
 
 export default function useForm<T>(shape: T) {
-  return useReducer(formUpdateHandler, shape)
+  const [formData, update] = useReducer(formUpdateHandler, shape)
+  const inform = useCallback((name: string, value: any) =>
+    update({ target: { name, value } }), []
+  )
+  return { formData, update, inform }
 }
 
 function formUpdateHandler<T>(state: T, event: any): T {

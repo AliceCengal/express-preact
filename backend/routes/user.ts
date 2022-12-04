@@ -1,33 +1,22 @@
 import express from 'express'
-import db from '../db';
+import { restricted } from '../controller/auth';
+import { getUserById, updateUser } from '../controller/user';
+import { handleResult } from '../utils/result';
+
 var router = express.Router();
 
 router.get('/:userid', async (req, res, next) => {
-  const { userid } = req.params
-  const user = await db.user.findUnique({
-    where: {
-      id: userid
-    },
-    select: {
-      id: true,
-      email: true,
-      name: true,
-      Project: true
-    }
-  })
-
-  if (user) {
-    res.json(user);
-  } else {
-    res.status(404)
-  }
-  
+  handleResult(
+    getUserById(req.params.userid),
+    res
+  )
 });
 
-router.post("/:userid", async (req, res) => {
-  
-  res.status(200)
-
+router.post("/:userid", restricted, async (req, res) => {
+  handleResult(
+    updateUser(req.params.userid, req.body),
+    res
+  )
 })
 
 export default router

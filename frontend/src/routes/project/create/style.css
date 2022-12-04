@@ -1,0 +1,21 @@
+
+.form {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form input, .form textarea {
+  margin-bottom: 1rem;
+}
+
+.form button {
+  width: 50%;
+  margin-inline: auto;
+  background-color: var(--c-left-base);
+  color: var(--bs-white);
+}
+
+.form button:hover {
+  background-color: var(--c-left-dark);
+}

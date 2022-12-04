@@ -1,0 +1,9 @@
+.profile_card {
+  display: grid;
+  padding: 1rem;
+  grid-template-columns: 10rem 1fr;
+}
+
+.profile_card label::after {
+  content: ':'
+}

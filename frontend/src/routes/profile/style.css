@@ -1,5 +1,38 @@
 .profile {
-  padding: 56px 20px;
-  min-height: 100%;
-  width: 100%;
+  display: flex;
+  padding-top: 1rem;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.action_bar {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edit {
+  background-color: var(--c-left-base);
+  color: white;
+}
+
+.edit:hover {
+  background-color: var(--c-left-dark);
+}
+
+.deact {
+  background-color: var(--c-right-base);
+  color: white;
+}
+
+.deact:hover {
+  background-color: var(--c-right-dark);
+}
+
+.delete {
+  background-color: var(--c-back-base);
+  color: white;
+}
+
+.delete:hover {
+  background-color: var(--c-back-dark);
 }

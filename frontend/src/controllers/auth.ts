@@ -1,3 +1,4 @@
+import { useQuery } from "react-query";
 
 export type AuthForm = {
   email: string,
@@ -51,6 +52,17 @@ export async function getProfile() {
   })
     .then(async (res) => {
       if (res.ok) return res.json();
-      throw new Error(await res.text())
+      return null
     })
+}
+
+export function useProfile() {
+  return useQuery(
+    ['/api/auth'],
+    getProfile,
+    {
+      refetchOnWindowFocus: false,
+      staleTime: 3600 * 1000,
+    }
+  )
 }

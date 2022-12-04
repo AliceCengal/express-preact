@@ -1,19 +1,13 @@
-import { getProfile, postLogout } from 'controllers/auth';
 import { h, Fragment } from 'preact';
 import { route } from 'preact-router';
 import { Link } from 'preact-router/match';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
+import { postLogout, useProfile } from 'controllers/auth';
 import style from './style.css';
 
 const Header = () => {
   const queryClient = useQueryClient()
-
-  const { isLoading, isError: notLoggedIn, data: profile } = useQuery(
-    ['/api/auth'],
-    getProfile, {
-      retry: false
-    }
-  )
+  const { data: profile } = useProfile()
 
   function doLogout() {
     postLogout()
@@ -31,7 +25,7 @@ const Header = () => {
       <nav>
         <Link activeClassName={style.active} href="/">Projects</Link>
         {
-          isLoading || notLoggedIn ?
+          !profile ?
             <Link activeClassName={style.active} href="/login">Login</Link> :
             <>
               <Link activeClassName={style.active} href="/profile">Profile</Link>

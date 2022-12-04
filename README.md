@@ -4,12 +4,14 @@ Features:
  - full typescript
  - Prisma ORM with sqlite example database
  - basic registration and login using `cookie-session`
+ - controller pattern
  - Frontend
     - Preact app
     - automatic build optimization via preact-cli
     - `react-query`
     - custom hooks: useForm
     - Bootstrap Reboot
+    - CSS modules
     - Google Material icons: https://fonts.google.com/icons
 
 Top level script is an Express app. `yarn start` or `npm run start` evokes a 
