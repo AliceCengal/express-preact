@@ -11,3 +11,8 @@
   justify-content: center;
   gap: 1rem;
 }
+
+.action button {
+  background-color: var(--c-left-base);
+  color: white;
+}

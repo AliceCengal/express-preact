@@ -1,0 +1,12 @@
+
+.main {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.action {
+  display: flex;
+  gap: 1rem;
+}

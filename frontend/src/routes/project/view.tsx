@@ -1,7 +1,9 @@
 import { ProjectCard } from "components/project/card"
 import { useFetchProject } from "controllers/project"
-import { h } from "preact"
+import { h, Fragment } from "preact"
 import { FC } from "utils/FC"
+
+import style from './style.css'
 
 interface Props {
   projectid: string
@@ -12,13 +14,17 @@ const ProjectView: FC<Props> = ({ projectid }) => {
   const project = useFetchProject(projectid)
 
   return (
-    <div class="container-lg" style={{ paddingTop: '1rem' }}>
+    <div class={"container-lg " + style.main}>
       {
         project.isLoading || project.isError || !project.data ?
-          <div>
-            View project: {projectid}
-          </div> :
-          <ProjectCard project={project.data} />
+          `View project: ${projectid}` :
+          <>
+            <ProjectCard project={project.data} />
+            <div class={style.action}>
+              <button>Edit</button>
+              <button>Delete</button>
+            </div>
+          </>
       }
     </div>
   )
