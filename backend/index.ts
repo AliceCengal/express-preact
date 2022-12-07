@@ -12,7 +12,7 @@ app.set("trust proxy", 1);
 app.use(cookieSession({
   name: "session",
   keys: ['zebra-bison-gorilla'],
-  maxAge: 24 * 60 * 1000
+  maxAge: 24 * 3600 * 1000
 }))
 
 app.use(logger('dev'));

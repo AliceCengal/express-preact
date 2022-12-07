@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "windowsDebug": "@powershell -Command $env:DEBUG='express-preact:server';node ./bin/www",
+    "windowsDebug": "@powershell -Command $env:DEBUG='express-preact:*'; ts-node ./bin/server.ts",
     "start": "ts-node ./bin/server.ts"
   },
   "dependencies": {

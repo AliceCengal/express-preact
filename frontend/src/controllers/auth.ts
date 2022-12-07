@@ -6,8 +6,8 @@ export type AuthForm = {
 }
 
 export async function postLogin(formData: AuthForm) {
-  return fetch("/api/auth/login", {
-    method: "POST",
+  return fetch("/api/auth", {
+    method: "PUT",
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -21,7 +21,7 @@ export async function postLogin(formData: AuthForm) {
 }
 
 export async function postRegister(formData: AuthForm) {
-  return fetch("/api/auth/register", {
+  return fetch("/api/auth", {
     method: "POST",
     headers: {
       'Accept': 'application/json',

@@ -1,77 +1,47 @@
 import { createHash } from 'crypto';
 import Debug from 'debug';
 import express from 'express'
+import { login, register } from '../controller/auth';
 import db from '../db';
 import exclude from '../utils/exclude';
 
 const debug = Debug("express-preact:auth")
 const router = express.Router();
 
-router.post("/register", async (req, res) => {
+router.post("/", async (req, res) => {
   const { email, password } = req.body
 
-  if (!email || !password) {
-    return res.status(400).send("No email and password")
-  }
+  register(email, password)
+    .then(result => {
+      if ('error' in result) {
+        return res.status(400).send(result.error)
+      }
+      if (req.session) req.session.user = result.data
 
-  const user = await db.user.findFirst({
-    where: { email: email }
-  })
-
-  if (user) {
-    return res.status(400).send("Email already registered")
-  }
-
-  const hash = createHash("sha256")
-  hash.update(email)
-  hash.update(password)
-  const hashedPassword = hash.digest().toString()
-  const username = email.split("@")[0]
-
-  const newUser = await db.user.create({
-    data: {
-      email,
-      name: username,
-      password: hashedPassword
-    }
-  })
-
-  if (req.session) req.session.user = newUser
-
-  return res.status(200).json({
-    status: 'ok', data: exclude(newUser, ['password'])
-  })
+      return res.status(200).json(result.data)
+    })
+    .catch(err => {
+      debug('Error when registering user', err)
+      return res.status(500).send(err)
+    })
 })
 
-router.post("/login", async (req, res) => {
+router.put("/", async (req, res) => {
   const { email, password } = req.body
 
-  if (!email || !password) {
-    return res.status(400).send("No email and password")
-  }
+  login(email, password)
+    .then(result => {
+      if ('error' in result) {
+        return res.status(400).send(result.error)
+      }
+      if (req.session) req.session.user = result.data
 
-  const user = await db.user.findFirst({
-    where: { email: email }
-  })
-
-  if (!user) {
-    return res.status(400).send("User not found")
-  }
-
-  const hash = createHash("sha256")
-  hash.update(email)
-  hash.update(password)
-  const hashedPassword = hash.digest().toString()
-
-  if (user.password !== hashedPassword) {
-    return res.status(400).send("Wrong email and password")
-  }
-
-  if (req.session) req.session.user = user
-
-  return res.status(200).json({
-    status: 'ok', data: exclude(user, ['password'])
-  })
+      return res.status(200).json(result.data)
+    })
+    .catch(err => {
+      debug('Error when logging in user', err)
+      return res.status(500).send(err)
+    })
 })
 
 router.delete('/', (req, res) => {

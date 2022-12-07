@@ -1,13 +1,13 @@
 import { h } from "preact"
 import { route } from "preact-router"
-// import { useQueryClient } from 'react-query'
+import { useQueryClient } from 'react-query'
 import { AuthForm, postLogin, postRegister } from "controllers/auth"
 import { FC } from "utils/fc"
 import useForm from "utils/use-form"
 import style from "./style.css"
 
 const Login: FC<{}> = () => {
-  // const queryClient = useQueryClient()
+  const queryClient = useQueryClient()
 
   const { formData, update } = useForm<AuthForm>({
     email: "",
@@ -26,6 +26,7 @@ const Login: FC<{}> = () => {
     postLogin(formData)
       .then(res => {
         console.log(res)
+        queryClient.invalidateQueries(['/api/auth'])
         route("/profile")
       })
       .catch(err => {
@@ -38,6 +39,7 @@ const Login: FC<{}> = () => {
     postRegister(formData)
       .then(res => {
         console.log(res)
+        queryClient.invalidateQueries(['/api/auth'])
         route("/profile")
       })
       .catch(err => {
