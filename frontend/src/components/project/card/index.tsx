@@ -1,5 +1,4 @@
 import { h } from "preact"
-import { FC } from "utils/FC"
 import { Project } from "controllers/project"
 
 import style from './style.css'
@@ -8,7 +7,7 @@ export type Props = {
   project: Project
 }
 
-export const ProjectCard: FC<Props> = ({ project }) => {
+export const ProjectCard = ({ project }: Props) => {
   return (
     <div class={style.profile_card + ' card-1'}>
       <label>Title</label>

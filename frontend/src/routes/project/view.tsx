@@ -1,7 +1,6 @@
+import { h, Fragment } from "preact"
 import { ProjectCard } from "components/project/card"
 import { useFetchProject } from "controllers/project"
-import { h, Fragment } from "preact"
-import { FC } from "utils/FC"
 
 import style from './style.css'
 
@@ -9,7 +8,7 @@ interface Props {
   projectid: string
 }
 
-const ProjectView: FC<Props> = ({ projectid }) => {
+const ProjectView = ({ projectid }: Props) => {
 
   const project = useFetchProject(projectid)
 

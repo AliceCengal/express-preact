@@ -1,7 +1,6 @@
 import { h } from "preact"
-import { FC } from "utils/FC"
 
-const ProfileUpdate: FC<{}> = () => {
+const ProfileUpdate = () => {
 
   return (
     <div class="container-lg">

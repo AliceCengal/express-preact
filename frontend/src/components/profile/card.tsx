@@ -1,5 +1,4 @@
 import { h, Fragment } from "preact"
-import { FC } from "utils/FC"
 import { User } from "controllers/profile"
 
 import style from './style.css'
@@ -8,7 +7,7 @@ export type Props = {
   user: User
 }
 
-const ProfileCard: FC<Props> = ({ user }) => {
+const ProfileCard = ({ user }: Props) => {
 
   return (
     <div class={style.profile_card + " card-1"}>

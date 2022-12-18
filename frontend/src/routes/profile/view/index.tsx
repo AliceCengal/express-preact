@@ -1,17 +1,16 @@
-import { h, Fragment } from "preact"
+import { h } from "preact"
 import ProfileCard from "components/profile/card"
 import { useFetchUser } from "controllers/profile"
-import { FC } from "utils/FC"
 
 interface Props {
   userid: string
 }
 
-const UserView: FC<Props> = ({ userid }) => {
+const UserView = ({ userid }: Props) => {
 
   const profile = useFetchUser(userid)
   // console.log(profile.data)
-  
+
   return (
     <div class="container-sm" style={{ paddingTop: '1rem' }}>
       <h1>Profile</h1>

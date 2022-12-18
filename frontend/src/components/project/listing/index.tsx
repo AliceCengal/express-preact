@@ -1,5 +1,4 @@
 import { h } from 'preact';
-import { FC } from 'utils/FC';
 import { Project, useFetchAllProjects } from "controllers/project"
 
 import style from './style.css'
@@ -31,7 +30,7 @@ const ProjectTableHeader = () => (
   </tr>
 )
 
-const ProjectTableRow: FC<{ project: Project, ix: number }> = ({ project, ix }) => (
+const ProjectTableRow = ({ project, ix }: { project: Project, ix: number }) => (
   <tr>
     <td>{ix}</td>
     <td>
