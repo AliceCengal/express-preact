@@ -1,4 +1,3 @@
-
 .login {
   margin-top: 6rem;
   margin-inline: auto;
@@ -18,12 +17,12 @@
   gap: 1rem;
 }
 
-.action button[name='register'] {
+.action button[name="register"] {
   background-color: green;
   color: white;
 }
 
-.action button[name='login'] {
+.action button[name="login"] {
   background-color: royalblue;
   color: white;
 }

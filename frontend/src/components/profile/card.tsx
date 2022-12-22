@@ -1,14 +1,13 @@
-import { h, Fragment } from "preact"
-import { User } from "controllers/profile"
+import { h, Fragment } from "preact";
+import { User } from "controllers/profile";
 
-import style from './style.css'
+import style from "./style.css";
 
 export type Props = {
-  user: User
-}
+  user: User;
+};
 
 const ProfileCard = ({ user }: Props) => {
-
   return (
     <div class={style.profile_card + " card-1"}>
       <label>Name</label>
@@ -17,22 +16,23 @@ const ProfileCard = ({ user }: Props) => {
       <label>Email</label>
       <span>{user.email}</span>
 
-      {
-        user.Project && user.Project.length ?
-          user.Project.map(({ title, id }, ix) =>
-            ix == 0 ?
+      {user.Project && user.Project.length
+        ? user.Project.map(({ title, id }, ix) =>
+            ix == 0 ? (
               <>
                 <label>Projects</label>
                 <a href={"/project/" + id}>{title}</a>
-              </> :
+              </>
+            ) : (
               <>
                 <div></div>
                 <a href={"/project/" + id}>{title}</a>
               </>
-          ) : null
-      }
+            )
+          )
+        : null}
     </div>
-  )
-}
+  );
+};
 
-export default ProfileCard
+export default ProfileCard;

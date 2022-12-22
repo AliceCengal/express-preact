@@ -1,58 +1,57 @@
-import { h } from "preact"
-import { route } from "preact-router"
-import { useQueryClient } from 'react-query'
-import { AuthForm, postLogin, postRegister } from "controllers/auth"
-import { FC } from "utils/fc"
-import useForm from "utils/use-form"
-import style from "./style.css"
+import { h } from "preact";
+import { route } from "preact-router";
+import { useQueryClient } from "react-query";
+import { AuthForm, postLogin, postRegister } from "controllers/auth";
+import useForm from "utils/use-form";
+import style from "./style.css";
 
-const Login: FC<{}> = () => {
-  const queryClient = useQueryClient()
+const Login = () => {
+  const queryClient = useQueryClient();
 
   const { formData, update } = useForm<AuthForm>({
     email: "",
-    password: ""
-  })
+    password: "",
+  });
 
   function handleSubmit(e: any) {
-    e.preventDefault()
-    if (e.submitter.name == "login")
-      doLogin()
-    else if (e.submitter.name == "register")
-      doRegister()
+    e.preventDefault();
+    if (e.submitter.name == "login") doLogin();
+    else if (e.submitter.name == "register") doRegister();
   }
 
   function doLogin() {
     postLogin(formData)
-      .then(res => {
-        console.log(res)
-        queryClient.invalidateQueries(['/api/auth'])
-        route("/profile")
+      .then((res) => {
+        console.log(res);
+        queryClient.invalidateQueries(["/api/auth"]);
+        route("/profile");
       })
-      .catch(err => {
-        console.error(err)
-        alert(err)
-      })
+      .catch((err) => {
+        console.error(err);
+        alert(err);
+      });
   }
 
   function doRegister() {
     postRegister(formData)
-      .then(res => {
-        console.log(res)
-        queryClient.invalidateQueries(['/api/auth'])
-        route("/profile")
+      .then((res) => {
+        console.log(res);
+        queryClient.invalidateQueries(["/api/auth"]);
+        route("/profile");
       })
-      .catch(err => {
-        console.error(err)
-        alert(err)
-      })
+      .catch((err) => {
+        console.error(err);
+        alert(err);
+      });
   }
 
   return (
     <div class="container-lg">
-      <form class={style.login + " card-1"}
-        onChange={update} onSubmit={handleSubmit}>
-
+      <form
+        class={style.login + " card-1"}
+        onChange={update}
+        onSubmit={handleSubmit}
+      >
         <label>Email</label>
         <input type="email" name="email" required />
 
@@ -69,8 +68,7 @@ const Login: FC<{}> = () => {
         </div>
       </form>
     </div>
-  )
+  );
+};
 
-}
-
-export default Login
+export default Login;

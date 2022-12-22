@@ -1,32 +1,31 @@
-import { h, Fragment } from "preact"
-import { ProjectCard } from "components/project/card"
-import { useFetchProject } from "controllers/project"
+import { h, Fragment } from "preact";
+import { ProjectCard } from "components/project/card";
+import { useFetchProject } from "controllers/project";
 
-import style from './style.css'
+import style from "./style.css";
 
 interface Props {
-  projectid: string
+  projectid: string;
 }
 
 const ProjectView = ({ projectid }: Props) => {
-
-  const project = useFetchProject(projectid)
+  const project = useFetchProject(projectid);
 
   return (
     <div class={"container-lg " + style.main}>
-      {
-        project.isLoading || project.isError || !project.data ?
-          `View project: ${projectid}` :
-          <>
-            <ProjectCard project={project.data} />
-            <div class={style.action}>
-              <button>Edit</button>
-              <button>Delete</button>
-            </div>
-          </>
-      }
+      {project.isLoading || project.isError || !project.data ? (
+        `View project: ${projectid}`
+      ) : (
+        <>
+          <ProjectCard project={project.data} />
+          <div class={style.action}>
+            <button>Edit</button>
+            <button>Delete</button>
+          </div>
+        </>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default ProjectView
+export default ProjectView;

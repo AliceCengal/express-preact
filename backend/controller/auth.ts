@@ -1,75 +1,72 @@
 import { createHash } from "crypto";
-import { RequestHandler } from "express";
-import Debug from 'debug'
+import Debug from "debug";
+import createHttpError from "http-errors";
 import db from "../db";
 import exclude from "../utils/exclude";
 import { UserResult } from "./user";
 
-const debug = Debug("express-preact:auth")
-
-export const restricted: RequestHandler = (req, res, next) => {
-  if (req.session && req.session.user) {
-    next()
-  } else {
-    return res.status(400).send("User is not logged in")
-  }
-}
+const debug = Debug("express-preact:auth");
 
 export async function register(email: string, password: string): UserResult {
   if (!email || !password) {
-    return { error: 'No email and password' }
+    throw new createHttpError.BadRequest(
+      "Email and password missing: " + email + " " + password
+    );
   }
 
   const user = await db.user.findFirst({
-    where: { email: email }
-  })
+    where: { email: email },
+  });
 
   if (user) {
-    return { error: "Email already registered" }
+    throw new createHttpError.BadRequest("Email already registered");
   }
 
-  const hash = createHash("sha256")
-  hash.update(email)
-  hash.update(password)
-  const hashedPassword = hash.digest().toString('hex')
-  const username = email.split("@")[0]
+  const hash = createHash("sha256");
+  hash.update(email);
+  hash.update(password);
+  const hashedPassword = hash.digest().toString("hex");
+  const username = email.split("@")[0];
 
   const newUser = await db.user.create({
     data: {
       email,
       name: username,
-      password: hashedPassword
-    }
-  })
+      password: hashedPassword,
+    },
+  });
 
   if (newUser) {
-    return { data: exclude(newUser, ['password']) }
+    return exclude(newUser, ["password"]);
   }
-  return { error: "Failed to register user" }
+  throw new createHttpError.InternalServerError("Failed to register user");
 }
 
 export async function login(email: string, password: string): UserResult {
-
   if (!email || !password) {
-    return { error: "No email and password" }
+    throw new createHttpError.BadRequest(
+      "Email and password missing: " + email + " " + password
+    );
   }
 
   const user = await db.user.findFirst({
-    where: { email: email }
-  })
+    where: { email: email },
+  });
 
   if (!user) {
-    return { error: "User not found" }
+    throw new createHttpError.NotFound("No user registered for: " + email);
   }
 
-  const hash = createHash("sha256")
-  hash.update(email)
-  hash.update(password)
-  const hashedPassword = hash.digest().toString('hex')
+  const hash = createHash("sha256");
+  hash.update(email);
+  hash.update(password);
+  const hashedPassword = hash.digest().toString("hex");
 
   if (user.password !== hashedPassword) {
-    return { error: "Wrong email and password" }
+    throw new createHttpError.BadRequest(
+      "Wrong email/password " + email + " " + password
+    );
   }
 
-  return { data: exclude(user, ['password']) }
+  return exclude(user, ["password"]);
 }

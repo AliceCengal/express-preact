@@ -1,11 +1,11 @@
-
 .form {
   padding-top: 1rem;
   display: flex;
   flex-direction: column;
 }
 
-.form input, .form textarea {
+.form input,
+.form textarea {
   margin-bottom: 1rem;
 }
 

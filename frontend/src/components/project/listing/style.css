@@ -2,12 +2,15 @@
   width: 100%;
 }
 
-.projects tr>* {
+.projects tr > * {
   padding: 0.25rem 1rem;
+}
+
+.projects tr > *:not(:nth-child(2)) {
   white-space: nowrap;
 }
 
-.projects tr>*:not(:last-child) {
+.projects tr > *:not(:last-child) {
   border-right: 1px solid slategray;
 }
 

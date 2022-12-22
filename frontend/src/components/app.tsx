@@ -1,21 +1,21 @@
-import { h } from 'preact';
-import { Route, Router } from 'preact-router';
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { h } from "preact";
+import { Route, Router } from "preact-router";
+import { QueryClient, QueryClientProvider } from "react-query";
 
-import Header from './header';
+import Header from "./header";
 
 // Code-splitting is automated for `routes` directory
-import Home from 'routes/home';
-import ProjectView from 'routes/project/view';
-import ProjectCreate from 'routes/project/create';
-import ProjectUpdate from 'routes/project/update';
-import Profile from 'routes/profile';
-import ProfileUpdate from 'routes/profile/update';
-import UserView from 'routes/profile/view';
-import Login from 'routes/login';
-import Page404 from 'routes/404';
+import Home from "routes/home";
+import ProjectView from "routes/project/view";
+import ProjectCreate from "routes/project/create";
+import ProjectUpdate from "routes/project/update";
+import Profile from "routes/profile";
+import ProfileUpdate from "routes/profile/update";
+import UserView from "routes/profile/view";
+import Login from "routes/login";
+import Page404 from "routes/404";
 
-const client = new QueryClient()
+const client = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={client}>

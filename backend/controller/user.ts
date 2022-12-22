@@ -1,13 +1,13 @@
 import { User } from "@prisma/client";
+import createHttpError from "http-errors";
 import db from "../db";
 import exclude from "../utils/exclude";
-import { Result } from "../utils/result";
 
-export type UserResult = Promise<Result<Partial<User>>>
+export type UserResult = Promise<Partial<User>>;
 
 export async function getUserById(id: any): UserResult {
-  if (!id || typeof id !== 'string') {
-    return { error: "Invalid id" }
+  if (!id || typeof id !== "string") {
+    throw new createHttpError.BadRequest("Id is missing");
   }
 
   const user = await db.user.findUnique({
@@ -16,34 +16,32 @@ export async function getUserById(id: any): UserResult {
       id: true,
       email: true,
       name: true,
-      Project: true
-    }
-  })
+      Project: true,
+    },
+  });
 
-  if (user) return { data: user }
-  return { error: "User does not exist with id: " + id }
+  if (user) return user;
+  throw new createHttpError.NotFound("User does not exist with id: " + id);
 }
 
-export async function updateUser(
-  id: any,
-  user: Partial<User>
-): UserResult {
-
-  if (!id || typeof id !== 'string') {
-    return { error: "Invalid id" }
+export async function updateUser(id: any, user: Partial<User>): UserResult {
+  if (!id || typeof id !== "string") {
+    throw new createHttpError.BadRequest("Id is missing");
   }
 
   const edit = {
-    ...user.name && { name: user.name },
-  }
+    ...(user.name && { name: user.name }),
+  };
 
   const edittedProfile = await db.user.update({
     where: { id },
-    data: edit
-  })
+    data: edit,
+  });
 
   if (edittedProfile) {
-    return { data: exclude(edittedProfile, ['password']) }
+    return exclude(edittedProfile, ["password"]);
   }
-  return { error: "Failed to update user profile" }
+  throw new createHttpError.InternalServerError(
+    "Failed to update user profile"
+  );
 }

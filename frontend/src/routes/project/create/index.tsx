@@ -1,53 +1,51 @@
-import { h } from "preact"
-import { useEffect } from "preact/hooks"
-import { createProject, ProjectCR } from "controllers/project"
-import useForm from "utils/use-form"
-import { useProfile } from "controllers/auth"
+import { h } from "preact";
+import { useEffect } from "preact/hooks";
+import { createProject, ProjectCR } from "controllers/project";
+import useForm from "utils/use-form";
+import { useProfile } from "controllers/auth";
 
-import style from "./style.css"
+import style from "./style.css";
+import { route } from "preact-router";
 
 const ProjectCreate = () => {
-
   const { formData, update, inform } = useForm<ProjectCR>({
-    owner: '',
-    title: '',
-    description: ''
-  })
+    owner: "",
+    title: "",
+    description: "",
+  });
 
-  const profile = useProfile()
+  const profile = useProfile();
 
   useEffect(() => {
     if (profile.data) {
-      inform('owner', profile.data.user.name)
+      inform("owner", profile.data.user.name);
     }
-  }, [profile.data])
+  }, [profile.data]);
 
   function handleSubmit(e: any) {
-    e.preventDefault()
+    e.preventDefault();
     createProject(formData)
       .then((res) => {
-        alert(JSON.stringify(res))
+        // alert(JSON.stringify(res))
+        route("/project/" + res.id);
       })
-      .catch((err) => alert(err))
+      .catch((err) => alert(err));
   }
 
   return (
     <div class="container-lg">
-      <form
-        class={style.form}
-        onChange={update}
-        onSubmit={handleSubmit}>
+      <form class={style.form} onChange={update} onSubmit={handleSubmit}>
         <h1>Create project</h1>
         <label>Owner</label>
-        <input type='text' readOnly name='owner' value={formData.owner} />
+        <input type="text" readOnly name="owner" value={formData.owner} />
         <label>Title</label>
-        <input type='text' name='title' value={formData.title} required />
+        <input type="text" name="title" value={formData.title} required />
         <label>Description</label>
-        <textarea rows={4} name='description' value={formData.description} />
-        <button type='submit'>Submit</button>
+        <textarea rows={4} name="description" value={formData.description} />
+        <button type="submit">Submit</button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default ProjectCreate
+export default ProjectCreate;

@@ -1,46 +1,46 @@
-import express from 'express'
-import { restricted } from '../controller/auth';
-import { createProject, deleteProject, getProjectById, getProjects, getProjectsByOwner, updateProject } from '../controller/project';
-import { handleResult } from '../utils/result';
+import express from "express";
+import {
+  createProject,
+  deleteProject,
+  getProjectById,
+  getProjects,
+  getProjectsByOwner,
+  updateProject,
+} from "../controller/project";
+import { restricted } from "./common";
 
-var router = express.Router();
+const router = express.Router();
 
-router.get('/', async (req, res) => {
-  if (req.query.ownerid) {
-    handleResult(
-      getProjectsByOwner(req.query.ownerid),
-      res
-    )
-  }
-  else handleResult(getProjects(), res)
+router.get("/", async (req, res, next) => {
+  const projects = req.query.ownerid
+    ? getProjectsByOwner(req.query.ownerid)
+    : getProjects();
+
+  projects.then((pro) => res.send(pro)).catch(next);
 });
 
-router.post('/', restricted, async (req, res) => {
-  handleResult(
-    createProject(req.session?.user.id, req.body),
-    res
-  )
-})
+router.post("/", restricted, async (req, res, next) => {
+  createProject(req.session?.user.id, req.body)
+    .then((project) => res.send(project))
+    .catch(next);
+});
 
-router.get('/:projectid', async (req, res) => {
-  handleResult(
-    getProjectById(req.params.projectid),
-    res
-  )
-})
+router.get("/:projectid", async (req, res, next) => {
+  getProjectById(req.params.projectid)
+    .then((project) => res.send(project))
+    .catch(next);
+});
 
-router.post('/:projectid', restricted, async (req, res) => {
-  handleResult(
-    updateProject(req.params.projectid, req.body),
-    res
-  )
-})
+router.post("/:projectid", restricted, async (req, res, next) => {
+  updateProject(req.params.projectid, req.body)
+    .then((project) => res.send(project))
+    .catch(next);
+});
 
-router.delete('/:projectid', restricted, async (req, res) => {
-  handleResult(
-    deleteProject(req.params.projectid),
-    res
-  )
-})
+router.delete("/:projectid", restricted, async (req, res, next) => {
+  deleteProject(req.params.projectid)
+    .then((project) => res.send(project))
+    .catch(next);
+});
 
-export default router
+export default router;

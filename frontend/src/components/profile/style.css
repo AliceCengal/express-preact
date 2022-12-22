@@ -1,4 +1,3 @@
-
 .profile_card {
   padding: 1rem;
   display: grid;
@@ -6,5 +5,5 @@
 }
 
 .profile_card label::after {
-  content: ':'
+  content: ":";
 }

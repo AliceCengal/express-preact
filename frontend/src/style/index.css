@@ -27,5 +27,5 @@ body {
 }
 
 form label:has(+ input[required])::after {
-  content: '*'
+  content: "*";
 }

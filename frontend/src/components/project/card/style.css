@@ -5,5 +5,5 @@
 }
 
 .profile_card label::after {
-  content: ':'
+  content: ":";
 }

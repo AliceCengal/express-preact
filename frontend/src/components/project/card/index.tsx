@@ -1,23 +1,23 @@
-import { h } from "preact"
-import { Project } from "controllers/project"
+import { h } from "preact";
+import { Project } from "controllers/project";
 
-import style from './style.css'
+import style from "./style.css";
 
 export type Props = {
-  project: Project
-}
+  project: Project;
+};
 
 export const ProjectCard = ({ project }: Props) => {
   return (
-    <div class={style.profile_card + ' card-1'}>
+    <div class={style.profile_card + " card-1"}>
       <label>Title</label>
       <span>{project.title}</span>
       <label>Description</label>
       <span>{project.description}</span>
       <label>Owner</label>
-      <a href={'/profile/' + project.ownerid}>
+      <a href={"/profile/" + project.ownerid}>
         <span>{project.owner?.name || "N/A"}</span>
       </a>
     </div>
-  )
-}
+  );
+};

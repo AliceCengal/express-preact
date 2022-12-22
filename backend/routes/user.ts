@@ -1,22 +1,19 @@
-import express from 'express'
-import { restricted } from '../controller/auth';
-import { getUserById, updateUser } from '../controller/user';
-import { handleResult } from '../utils/result';
+import express from "express";
+import { getUserById, updateUser } from "../controller/user";
+import { restricted } from "./common";
 
-var router = express.Router();
+const router = express.Router();
 
-router.get('/:userid', async (req, res, next) => {
-  handleResult(
-    getUserById(req.params.userid),
-    res
-  )
+router.get("/:userid", async (req, res, next) => {
+  getUserById(req.params.userid)
+    .then((user) => res.send(user))
+    .catch(next);
 });
 
-router.post("/:userid", restricted, async (req, res) => {
-  handleResult(
-    updateUser(req.params.userid, req.body),
-    res
-  )
-})
+router.put("/:userid", restricted, async (req, res, next) => {
+  updateUser(req.params.userid, req.body)
+    .then((user) => res.send(user))
+    .catch(next);
+});
 
-export default router
+export default router;
