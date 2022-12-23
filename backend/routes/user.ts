@@ -1,4 +1,5 @@
 import express from "express";
+import createHttpError from "http-errors";
 import { getUserById, updateUser } from "../controller/user";
 import { restricted } from "./common";
 
@@ -11,9 +12,12 @@ router.get("/:userid", async (req, res, next) => {
 });
 
 router.put("/:userid", restricted, async (req, res, next) => {
-  updateUser(req.params.userid, req.body)
-    .then((user) => res.send(user))
-    .catch(next);
+  const { userid } = req.params;
+  if (req.session?.user?.id === userid)
+    updateUser(req.params.userid, req.body)
+      .then((user) => res.send(user))
+      .catch(next);
+  else throw new createHttpError.Unauthorized("Wrong user");
 });
 
 export default router;

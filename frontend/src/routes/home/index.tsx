@@ -8,8 +8,8 @@ const Home = () => (
   <div class={style.home + " container-lg"}>
     <h1>Projects</h1>
     <div class={style.action}>
-      <a href="/project/create">
-        <button tabIndex={-1}>new project</button>
+      <a class="btn" href="/project/create">
+        new project
       </a>
       <ProjectSearchBar />
     </div>

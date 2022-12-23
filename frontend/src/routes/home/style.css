@@ -12,7 +12,7 @@
   gap: 1rem;
 }
 
-.action button {
+.action a {
   background-color: var(--c-left-base);
   color: white;
 }
