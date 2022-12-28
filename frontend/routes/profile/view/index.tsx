@@ -13,7 +13,7 @@ const UserView = ({ userid }: Props) => {
   return (
     <div class="container-sm" style={{ paddingTop: "1rem" }}>
       <h1>Profile</h1>
-      {profile.isLoading || profile.isError || !profile.data ? (
+      {profile.isLoading || profile.error || !profile.data ? (
         <div>Loading profile for {userid}...</div>
       ) : (
         <ProfileCard user={profile.data} />

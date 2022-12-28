@@ -1,19 +1,17 @@
 import { h, Fragment } from "preact";
 import { route } from "preact-router";
 import { Link } from "preact-router/match";
-import { useQueryClient } from "react-query";
 import { postLogout, useProfile } from "controllers/auth";
 import style from "./style.css";
 
 const Header = () => {
-  const queryClient = useQueryClient();
-  const { data: profile } = useProfile();
+  const { data: profile, mutate } = useProfile();
 
   function doLogout() {
     postLogout()
       .then((res) => {
         console.log(res);
-        queryClient.invalidateQueries(["/api/auth"]);
+        mutate();
         route("/login");
       })
       .catch((err) => alert(err));

@@ -13,7 +13,7 @@ const ProjectView = ({ projectid }: Props) => {
 
   return (
     <div class={"container-lg " + style.main}>
-      {project.isLoading || project.isError || !project.data ? (
+      {project.isLoading || project.error || !project.data ? (
         `View project: ${projectid}`
       ) : (
         <>

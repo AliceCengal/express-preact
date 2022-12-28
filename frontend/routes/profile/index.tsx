@@ -20,7 +20,7 @@ const Profile = () => {
       <h1>Profile</h1>
       {profile.isLoading ? (
         <div>Loading...</div>
-      ) : profile.isError || !profile.data ? (
+      ) : profile.error || !profile.data ? (
         <div>Failed to get profile info</div>
       ) : (
         <>

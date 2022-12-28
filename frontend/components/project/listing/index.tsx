@@ -1,5 +1,5 @@
 import { h } from "preact";
-import { Project, useFetchAllProjects } from "controllers/project";
+import { ProjectWithOwner, useFetchAllProjects } from "controllers/project";
 
 import style from "./style.css";
 
@@ -10,7 +10,7 @@ export const ProjectListing = () => {
     <table class={style.projects + " card-1"}>
       <ProjectTableHeader />
       {allProjects.data
-        ? allProjects.data.map((p: Project, ix: number) => (
+        ? allProjects.data.map((p: ProjectWithOwner, ix: number) => (
             <ProjectTableRow project={p} ix={ix + 1} />
           ))
         : null}
@@ -28,7 +28,13 @@ const ProjectTableHeader = () => (
   </tr>
 );
 
-const ProjectTableRow = ({ project, ix }: { project: Project; ix: number }) => (
+const ProjectTableRow = ({
+  project,
+  ix,
+}: {
+  project: ProjectWithOwner;
+  ix: number;
+}) => (
   <tr>
     <td>{ix}</td>
     <td>

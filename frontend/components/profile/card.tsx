@@ -1,10 +1,10 @@
 import { h, Fragment } from "preact";
-import { User } from "controllers/profile";
+import { UserWithProfile } from "controllers/profile";
 
 import style from "./style.css";
 
 export type Props = {
-  user: User;
+  user: UserWithProfile;
 };
 
 const ProfileCard = ({ user }: Props) => {

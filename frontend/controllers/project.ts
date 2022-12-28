@@ -1,4 +1,5 @@
-import { useQuery } from "react-query";
+import { Project, User } from "@prisma/client";
+import useSWR from "swr";
 import wfetch from "utils/wrapped-fetch";
 
 export type ProjectCR = {
@@ -7,15 +8,9 @@ export type ProjectCR = {
   owner: string;
 };
 
-export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  cts: string;
-  uts: string;
-  ownerid: string;
-  owner?: { name: string };
-}
+export type ProjectWithOwner = Project & {
+  owner: User;
+};
 
 export async function createProject(formData: ProjectCR) {
   return wfetch("/api/project", {
@@ -29,19 +24,13 @@ export async function createProject(formData: ProjectCR) {
 }
 
 export function useFetchProject(id: string) {
-  return useQuery(["/api/project", id], async () => {
-    return (await wfetch("/api/project/" + id)) as Project;
-  });
+  return useSWR("/api/project/" + id, wfetch);
 }
 
 export function useFetchAllProjects() {
-  return useQuery(["/api/project", "all"], async () => {
-    return (await wfetch("/api/project")) as Project[];
-  });
+  return useSWR("/api/project/", wfetch);
 }
 
 export function useFetchProjectsForOwner(id: string) {
-  return useQuery(["/api/project", "ownerid", id], async () => {
-    return (await wfetch("/api/project?ownerid=" + id)) as Project[];
-  });
+  return useSWR("/api/project?ownerid=" + id, wfetch);
 }

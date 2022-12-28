@@ -1,10 +1,10 @@
 import { h } from "preact";
-import { Project } from "controllers/project";
+import { ProjectWithOwner } from "controllers/project";
 
 import style from "./style.css";
 
 export type Props = {
-  project: Project;
+  project: ProjectWithOwner;
 };
 
 export const ProjectCard = ({ project }: Props) => {

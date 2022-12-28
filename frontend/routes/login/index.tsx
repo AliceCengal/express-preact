@@ -1,13 +1,10 @@
 import { h } from "preact";
 import { route } from "preact-router";
-import { useQueryClient } from "react-query";
 import { AuthForm, postLogin, postRegister } from "controllers/auth";
 import useForm from "utils/use-form";
 import style from "./style.css";
 
 const Login = () => {
-  const queryClient = useQueryClient();
-
   const { formData, update } = useForm<AuthForm>({
     email: "",
     password: "",
@@ -23,7 +20,6 @@ const Login = () => {
     postLogin(formData)
       .then((res) => {
         console.log(res);
-        queryClient.invalidateQueries(["/api/auth"]);
         route("/profile");
       })
       .catch((err) => {
@@ -36,7 +32,6 @@ const Login = () => {
     postRegister(formData)
       .then((res) => {
         console.log(res);
-        queryClient.invalidateQueries(["/api/auth"]);
         route("/profile");
       })
       .catch((err) => {

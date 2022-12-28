@@ -1,4 +1,5 @@
-import { useQuery } from "react-query";
+import useSWR from "swr";
+import { authFetcher } from "utils/fetchers";
 
 export type AuthForm = {
   email: string;
@@ -43,18 +44,6 @@ export async function postLogout() {
   });
 }
 
-export async function getProfile() {
-  return fetch("/api/auth", {
-    credentials: "include",
-  }).then(async (res) => {
-    if (res.ok) return res.json();
-    return null;
-  });
-}
-
 export function useProfile() {
-  return useQuery(["/api/auth"], getProfile, {
-    refetchOnWindowFocus: false,
-    staleTime: 3600 * 1000,
-  });
+  return useSWR("/api/auth", authFetcher);
 }

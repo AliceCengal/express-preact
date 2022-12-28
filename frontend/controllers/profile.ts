@@ -1,15 +1,11 @@
-import { useQuery } from "react-query";
+import { Project, User } from "@prisma/client";
+import useSWR from "swr";
 import wfetch from "utils/wrapped-fetch";
 
-export interface User {
-  id: string;
-  email: string;
-  name: string;
-  Project?: { title: string; id: string }[];
+export function useFetchUser(id: string) {
+  return useSWR("/api/user/" + id, wfetch);
 }
 
-export function useFetchUser(id: string) {
-  return useQuery(["/api/user", id], async () => {
-    return (await wfetch("/api/user/" + id)) as User;
-  });
-}
+export type UserWithProfile = User & {
+  Project: Project[];
+};
