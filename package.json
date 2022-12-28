@@ -3,11 +3,24 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "windowsDebug": "@powershell -Command $env:DEBUG='express-preact:*'; ts-node ./bin/server.ts",
-    "start": "ts-node ./bin/server.ts"
+    "start": "ts-node ./bin/server.ts",
+    "build": "preact build frontend",
+    "dev": "preact watch frontend --port 8080",
+    "lint": "eslint frontend"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "preact",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "ignorePatterns": [
+      "build/"
+    ]
   },
   "dependencies": {
     "@prisma/client": "^4.6.1",
+    "bootstrap": "^5.2.3",
     "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
@@ -15,7 +28,11 @@
     "express": "~4.16.1",
     "express-http-proxy": "^1.6.3",
     "http-errors": "^2.0.0",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "preact": "^10.10.0",
+    "preact-render-to-string": "^5.2.1",
+    "preact-router": "^3.2.1",
+    "swr": "^2.0.0"
   },
   "devDependencies": {
     "@types/cookie-session": "^2.0.44",
@@ -25,6 +42,11 @@
     "@types/http-errors": "^2.0.1",
     "@types/node": "^18.11.9",
     "prisma": "^4.6.1",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
+    "eslint": "^8.20.0",
+    "eslint-config-preact": "^1.3.0",
+    "preact-cli": "^3.4.0",
     "typescript": "^4.9.3"
   }
 }
