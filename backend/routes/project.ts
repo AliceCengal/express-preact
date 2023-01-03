@@ -20,7 +20,7 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/", restricted, async (req, res, next) => {
-  createProject(req.session?.user.id, req.body)
+  createProject(req.session?.userid, req.body)
     .then((project) => res.send(project))
     .catch(next);
 });

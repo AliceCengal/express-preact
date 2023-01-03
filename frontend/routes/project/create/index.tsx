@@ -18,7 +18,7 @@ const ProjectCreate = () => {
 
   useEffect(() => {
     if (profile.data) {
-      inform("owner", profile.data.user.name);
+      inform("owner", profile.data.name);
     }
   }, [profile.data]);
 

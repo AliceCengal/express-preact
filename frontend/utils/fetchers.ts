@@ -1,4 +1,4 @@
-export function authFetcher(url) {
+export async function authFetcher(url: string) {
   return fetch(url, {
     credentials: "include",
   }).then(async (res) => {

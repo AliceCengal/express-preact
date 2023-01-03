@@ -29,7 +29,7 @@ const Profile = () => {
             <button class={style.deact}>Deactivate</button>
             <button class={style.delete}>Delete</button>
           </div>
-          <ProfileCard user={profile.data.user} />
+          <ProfileCard user={profile.data} />
         </>
       )}
 

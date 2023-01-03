@@ -5,10 +5,10 @@ import Debug from "debug";
 const debug = Debug("express-preact:api");
 
 export const restricted: RequestHandler = (req, res, next) => {
-  if (req.session && req.session.user) {
+  if (req.session && req.session.userid) {
     next();
   } else {
-    return res.status(400).send("User is not logged in");
+    throw new createHttpError.Unauthorized("User is not logged in");
   }
 };
 

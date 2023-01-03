@@ -13,7 +13,7 @@ router.get("/:userid", async (req, res, next) => {
 
 router.put("/:userid", restricted, async (req, res, next) => {
   const { userid } = req.params;
-  if (req.session?.user?.id === userid)
+  if (req.session?.userid === userid)
     updateUser(req.params.userid, req.body)
       .then((user) => res.send(user))
       .catch(next);
