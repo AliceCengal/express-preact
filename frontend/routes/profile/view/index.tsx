@@ -6,7 +6,7 @@ interface Props {
   userid: string;
 }
 
-const UserView = ({ userid }: Props) => {
+export default function UserView({ userid }: Props) {
   const profile = useFetchUser(userid);
   // console.log(profile.data)
 
@@ -20,6 +20,4 @@ const UserView = ({ userid }: Props) => {
       )}
     </div>
   );
-};
-
-export default UserView;
+}

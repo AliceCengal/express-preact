@@ -13,23 +13,23 @@ import UserView from "routes/profile/view";
 import Login from "routes/login";
 import Page404 from "routes/404";
 
-const App = () => (
-  <div id="app">
-    <Header />
-    <Router>
-      <Route path="/" component={Home} />
-      <Route path="/project/create" component={ProjectCreate} />
-      <Route path="/project/:projectid" component={ProjectView} />
-      <Route path="/project/:projectid/update" component={ProjectUpdate} />
+export default function App() {
+  return (
+    <div id="app">
+      <Header />
+      <Router>
+        <Route path="/" component={Home} />
+        <Route path="/project/create" component={ProjectCreate} />
+        <Route path="/project/:projectid" component={ProjectView} />
+        <Route path="/project/:projectid/update" component={ProjectUpdate} />
 
-      <Route path="/profile/" component={Profile} />
-      <Route path="/profile/update" component={ProfileUpdate} />
-      <Route path="/profile/:userid" component={UserView} />
+        <Route path="/profile/" component={Profile} />
+        <Route path="/profile/update" component={ProfileUpdate} />
+        <Route path="/profile/:userid" component={UserView} />
 
-      <Route path="/login" component={Login} />
-      <Route default component={Page404} />
-    </Router>
-  </div>
-);
-
-export default App;
+        <Route path="/login" component={Login} />
+        <Route default component={Page404} />
+      </Router>
+    </div>
+  );
+}

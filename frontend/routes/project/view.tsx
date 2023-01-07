@@ -8,7 +8,7 @@ interface Props {
   projectid: string;
 }
 
-const ProjectView = ({ projectid }: Props) => {
+export default function ProjectView({ projectid }: Props) {
   const project = useFetchProject(projectid);
 
   return (
@@ -26,6 +26,4 @@ const ProjectView = ({ projectid }: Props) => {
       )}
     </div>
   );
-};
-
-export default ProjectView;
+}

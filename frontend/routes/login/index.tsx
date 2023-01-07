@@ -4,7 +4,7 @@ import { AuthForm, postLogin, postRegister } from "controllers/auth";
 import useForm from "utils/use-form";
 import style from "./style.css";
 
-const Login = () => {
+export default function Login() {
   const { formData, update } = useForm<AuthForm>({
     email: "",
     password: "",
@@ -64,6 +64,4 @@ const Login = () => {
       </form>
     </div>
   );
-};
-
-export default Login;
+}

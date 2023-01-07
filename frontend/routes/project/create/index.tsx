@@ -29,7 +29,7 @@ const ProjectCreate = () => {
         // alert(JSON.stringify(res))
         route("/project/" + res.id);
       })
-      .catch((err) => alert(err));
+      .catch(alert);
   }
 
   return (

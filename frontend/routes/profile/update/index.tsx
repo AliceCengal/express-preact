@@ -1,11 +1,9 @@
 import { h } from "preact";
 
-const ProfileUpdate = () => {
+export default function ProfileUpdate() {
   return (
     <div class="container-lg">
       <h1>Update user profile</h1>
     </div>
   );
-};
-
-export default ProfileUpdate;
+}

@@ -5,7 +5,7 @@ import ProfileCard from "components/profile/card";
 
 import style from "./style.css";
 
-const Profile = () => {
+export default function Profile() {
   const [time, setTime] = useState<number>(Date.now());
 
   const profile = useProfile();
@@ -36,6 +36,4 @@ const Profile = () => {
       <div>Current time: {new Date(time).toLocaleString()}</div>
     </div>
   );
-};
-
-export default Profile;
+}

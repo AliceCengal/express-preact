@@ -7,7 +7,7 @@ export type Props = {
   project: ProjectWithOwner;
 };
 
-export const ProjectCard = ({ project }: Props) => {
+export function ProjectCard({ project }: Props) {
   return (
     <div class={style.profile_card + " card-1"}>
       <label>Title</label>
@@ -20,4 +20,4 @@ export const ProjectCard = ({ project }: Props) => {
       </a>
     </div>
   );
-};
+}

@@ -7,7 +7,7 @@ export type Props = {
   user: UserWithProfile;
 };
 
-const ProfileCard = ({ user }: Props) => {
+export default function ProfileCard({ user }: Props) {
   return (
     <div class={style.profile_card + " card-1"}>
       <label>Name</label>
@@ -33,6 +33,4 @@ const ProfileCard = ({ user }: Props) => {
         : null}
     </div>
   );
-};
-
-export default ProfileCard;
+}

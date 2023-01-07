@@ -4,7 +4,7 @@ import { Link } from "preact-router/match";
 import { postLogout, useProfile } from "controllers/auth";
 import style from "./style.css";
 
-const Header = () => {
+export default function Header() {
   const { data: profile, mutate } = useProfile();
 
   function doLogout() {
@@ -41,6 +41,4 @@ const Header = () => {
       </nav>
     </header>
   );
-};
-
-export default Header;
+}

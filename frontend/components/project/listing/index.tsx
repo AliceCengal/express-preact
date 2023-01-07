@@ -3,7 +3,7 @@ import { ProjectWithOwner, useFetchAllProjects } from "controllers/project";
 
 import style from "./style.css";
 
-export const ProjectListing = () => {
+export function ProjectListing() {
   const allProjects = useFetchAllProjects();
 
   return (
@@ -16,34 +16,38 @@ export const ProjectListing = () => {
         : null}
     </table>
   );
-};
+}
 
-const ProjectTableHeader = () => (
-  <tr>
-    <th>#</th>
-    <th>Project title</th>
-    <th>Owner</th>
-    <th>Date created</th>
-    <th>Date updated</th>
-  </tr>
-);
+export function ProjectTableHeader() {
+  return (
+    <tr>
+      <th>#</th>
+      <th>Project title</th>
+      <th>Owner</th>
+      <th>Date created</th>
+      <th>Date updated</th>
+    </tr>
+  );
+}
 
-const ProjectTableRow = ({
+export function ProjectTableRow({
   project,
   ix,
 }: {
   project: ProjectWithOwner;
   ix: number;
-}) => (
-  <tr>
-    <td>{ix}</td>
-    <td>
-      <a href={"/project/" + project.id}>{project.title}</a>
-    </td>
-    <td>
-      <a href={"/profile/" + project.ownerid}>{project.owner?.name}</a>
-    </td>
-    <td>{new Date(project.cts).toDateString()}</td>
-    <td>{new Date(project.uts).toDateString()}</td>
-  </tr>
-);
+}) {
+  return (
+    <tr>
+      <td>{ix}</td>
+      <td>
+        <a href={"/project/" + project.id}>{project.title}</a>
+      </td>
+      <td>
+        <a href={"/profile/" + project.ownerid}>{project.owner?.name}</a>
+      </td>
+      <td>{new Date(project.cts).toDateString()}</td>
+      <td>{new Date(project.uts).toDateString()}</td>
+    </tr>
+  );
+}
